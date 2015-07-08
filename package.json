@@ -6,7 +6,7 @@
   "activationCommands": {
     "atom-workspace": "gibber:toggle"
   },
-  "repository": "https://github.com/atom/gibber",
+  "repository": "https://github.com/charlieroberts/gibber.atom",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
