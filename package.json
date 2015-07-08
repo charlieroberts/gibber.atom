@@ -12,7 +12,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "gibber.audio.lib": "~0.7.0",
+    "gibber.audio.lib": "~0.7.1",
     "gibber.core.lib": "~0.2.0",
     "web-audio-api": "~0.2.1",
     "underscore-plus": "~1.6.6",
