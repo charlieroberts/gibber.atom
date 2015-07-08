@@ -1,7 +1,7 @@
 {
   "name": "gibber",
   "main": "./lib/gibber",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An Atom-enabled version of the Gibber live coding system.",
   "activationCommands": {
     "atom-workspace": "gibber:toggle"
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "gibber.audio.lib": "~0.7.0",
-    "gibber.core.lib" : "~0.2.0",
+    "gibber.core.lib": "~0.2.0",
     "web-audio-api": "~0.2.1",
     "underscore-plus": "~1.6.6",
     "speaker": "~0.2.5",
