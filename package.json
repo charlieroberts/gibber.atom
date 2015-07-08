@@ -1,7 +1,7 @@
 {
   "name": "gibber",
   "main": "./lib/gibber",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An Atom-enabled version of the Gibber live coding system.",
   "activationCommands": {
     "atom-workspace": "gibber:toggle"
