@@ -1,11 +1,10 @@
-AudioContext = require('web-audio-api').AudioContext
+# AudioContext = require('web-audio-api').AudioContext
 _ = require 'underscore-plus'
-
-Speaker = require('speaker')
+# global.Speaker = require('speaker')
 Gibber = global.Gibber = require 'gibber.core.lib'
 AudioConstructor = require 'gibber.audio.lib'
 
-global.AudioContext = global.webkitAudioContext = AudioContext
+# global.AudioContext = global.webkitAudioContext = AudioContext
 
 {CompositeDisposable} = require 'atom'
 {allowUnsafeEval, Function} = require 'loophole'
@@ -20,51 +19,53 @@ global.$ = Gibber.dollar
 try
   Gibber.init()
 catch e
-  console.log( e )
+  console.log( "ERROR", e )
 
-Gibberish = Audio.Core
-Gibberish.node.disconnect()
+# Gibberish = Audio.Core
+# Gibberish.node.disconnect()
 
-# HACK: Gibber.init partially fails, so we have to make up the slack below...
-Gibberish.context = new AudioContext()
+# # HACK: Gibber.init partially fails, so we have to make up the slack below...
+# Gibberish.context = new AudioContext()
+#
+# Gibberish.context.outStream = new Speaker({
+#   channels: 2,
+#   bitDepth: 16,
+#   sampleRate: Gibberish.context.sampleRate
+# })
+# Gibberish.node = Gibberish.context.createScriptProcessor(1024, 2, 2, Gibberish.context.sampleRate)
+#
+# $.extend( Gibber.Binops, Audio.Binops )
+#
+# Gibberish.node.onaudioprocess = Gibberish.audioProcess
+# Gibberish.out = new Gibberish.Bus2()
+# Gibberish.out.codegen() # make sure bus is first upvalue so that clearing works correctly
+#
+# Audio.Master = Audio.Busses.Bus().connect( Audio.Core.out )
+#
+# Audio.Master.type = 'Bus'
+# Audio.Master.name = 'Master'
+#
+# $.extend( true, Audio.Master, Audio.ugenTemplate )
+# Audio.Master.fx.ugen = Audio.Master
+#
+# Audio.ugenTemplate.connect =
+#   Audio.Core._oscillator.connect =
+#   Audio.Core._synth.connect =
+#   Audio.Core._effect.connect =
+#   Audio.Core._bus.connect =
+#   Audio.connect;
+#
+# Audio.Core.defineUgenProperty = Audio.defineUgenProperty
+#
+# $.extend( Gibber.Presets, Audio.Synths.Presets )
+# $.extend( Gibber.Presets, Audio.Percussion.Presets )
+# $.extend( Gibber.Presets, Audio.FX.Presets )
+#
+# Audio.Clock.start( true )
+#
+# Gibberish.dirty( Gibberish.out )
+# Gibberish.node.connect( Gibberish.context.destination )
 
-Gibberish.context.outStream = new Speaker({
-  channels: 2,
-  bitDepth: 16,
-  sampleRate: Gibberish.context.sampleRate
-})
-Gibberish.node = Gibberish.context.createScriptProcessor(1024, 2, 2, Gibberish.context.sampleRate)
-
-Gibberish.node.onaudioprocess = Gibberish.audioProcess
-Gibberish.out = new Gibberish.Bus2()
-Gibberish.out.codegen() # make sure bus is first upvalue so that clearing works correctly
-Gibberish.dirty(Gibberish.out)
-Gibberish.node.connect( Gibberish.context.destination )
-
-$.extend( Gibber.Binops, Audio.Binops )
-
-Audio.Master = Audio.Busses.Bus().connect( Audio.Core.out )
-
-Audio.Master.type = 'Bus'
-Audio.Master.name = 'Master'
-
-$.extend( true, Audio.Master, Audio.ugenTemplate )
-Audio.Master.fx.ugen = Audio.Master
-
-Audio.ugenTemplate.connect =
-  Audio.Core._oscillator.connect =
-  Audio.Core._synth.connect =
-  Audio.Core._effect.connect =
-  Audio.Core._bus.connect =
-  Audio.connect;
-
-Audio.Core.defineUgenProperty = Audio.defineUgenProperty
-
-$.extend( Gibber.Presets, Audio.Synths.Presets )
-$.extend( Gibber.Presets, Audio.Percussion.Presets )
-$.extend( Gibber.Presets, Audio.FX.Presets )
-
-Audio.Clock.start( true )
 
 # end HACK
 
@@ -79,7 +80,7 @@ module.exports = _Gibber =
 
   execute: (state)->
     editor = atom.workspace.getActivePaneItem()
-    selectionRange = editor.getLastSelection()
+    selectionRange = editor.getLastSelection().getBufferRange()
 
     if selectionRange.start == selectionRange.end
       selectionRange = editor.cursors[0].getCurrentLineBufferRange()
@@ -91,7 +92,7 @@ module.exports = _Gibber =
 
   delayedExecute: ( state ) ->
     editor = atom.workspace.getActivePaneItem()
-    selectionRange = editor.getLastSelection()
+    selectionRange = editor.getLastSelection().getBufferRange()
 
     if selectionRange.start == selectionRange.end
       selectionRange = editor.cursors[0].getCurrentLineBufferRange()
